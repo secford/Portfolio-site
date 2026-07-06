@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="container">
+      <h1>Projects</h1>
+      <p class="subtitle">Collection of websites and applications, gathered in one place</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">all</button>
+    </div>
+    <div class="projects-grid" id="projects"></div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="footer-line"></span>
+      <p>&copy; <span id="year"></span> portfolio</p>
+    </div>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

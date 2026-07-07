@@ -16,7 +16,6 @@ function renderProjects(projects) {
     )
     .join("");
 }
-
 function buildFilters(projects) {
   const tags = new Set();
   projects.forEach((p) => p.tags.forEach((t) => tags.add(t)));

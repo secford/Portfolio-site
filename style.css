@@ -132,7 +132,7 @@ header h1 {
 .filter-bar {
   display: flex;
   gap: 4px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 48px;
   justify-content: center;
   padding: 6px;
@@ -140,8 +140,31 @@ header h1 {
   border: 1px solid var(--border);
   border-radius: 100px;
   width: fit-content;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-slider {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  background: var(--accent);
+  border-radius: 100px;
+  transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .filter-btn {
@@ -153,9 +176,12 @@ header h1 {
   cursor: pointer;
   font-size: 0.82rem;
   font-weight: 500;
-  transition: all var(--transition);
+  transition: color var(--transition);
   letter-spacing: 0.01em;
   border-radius: 100px;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -163,7 +189,6 @@ header h1 {
 }
 
 .filter-btn.active {
-  background: var(--accent);
   color: var(--bg);
 }
 
@@ -364,7 +389,7 @@ footer {
 @media (max-width: 600px) {
   .projects-grid { grid-template-columns: 1fr; }
   header { padding: 60px 0 36px; }
-  .filter-bar { border-radius: var(--radius); padding: 8px; }
+  .filter-bar { border-radius: 100px; padding: 5px; justify-content: flex-start; }
   header h1 { font-size: 2.2rem; }
   .subtitle { font-size: 0.95rem; }
 }

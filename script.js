@@ -50,10 +50,24 @@ function renderProjects(projects) {
   });
 }
 
+function moveSlider(btn) {
+  const slider = document.querySelector(".filter-slider");
+  const bar = document.querySelector(".filter-bar");
+  const barRect = bar.getBoundingClientRect();
+  const btnRect = btn.getBoundingClientRect();
+  slider.style.left = btnRect.left - barRect.left + "px";
+  slider.style.width = btnRect.width + "px";
+}
+
 function buildFilters(projects) {
   const tags = new Set();
   projects.forEach((p) => p.tags.forEach((t) => tags.add(t)));
   const container = document.querySelector(".filter-bar");
+
+  const slider = document.createElement("div");
+  slider.className = "filter-slider";
+  container.appendChild(slider);
+
   [...tags].sort().forEach((tag) => {
     const btn = document.createElement("button");
     btn.className = "filter-btn";
@@ -62,18 +76,28 @@ function buildFilters(projects) {
     container.appendChild(btn);
   });
 
+  const allBtn = container.querySelector('[data-filter="all"]');
+  allBtn.classList.add("active");
+  moveSlider(allBtn);
+
   container.addEventListener("click", (e) => {
     if (!e.target.classList.contains("filter-btn")) return;
     document
       .querySelectorAll(".filter-btn")
       .forEach((b) => b.classList.remove("active"));
     e.target.classList.add("active");
+    moveSlider(e.target);
     const filter = e.target.dataset.filter;
     const filtered =
       filter === "all"
         ? PROJECTS
         : PROJECTS.filter((p) => p.tags.includes(filter));
     renderProjects(filtered);
+  });
+
+  window.addEventListener("resize", () => {
+    const active = container.querySelector(".filter-btn.active");
+    if (active) moveSlider(active);
   });
 }
 
